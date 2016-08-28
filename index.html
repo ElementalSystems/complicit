@@ -1,108 +1,15 @@
 <html>
   <head>
     <title>Complicit</title>
-  <style>
-  body {
-    margin:0px;
-    padding:0px;
-    text-align:center;
-	background-color: #088;
-  }
-  
-  #board {
-    background-color: #000;
-	position: absolute;
-  }
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="complicit.css">
 
-  #sample {
-    background-color: #F00;
-	position: absolute;
-	width: 2em;
-	height: 2em;
-	top: 20px;
-	left:20px;
-  }
-  
-  </style>
   </head>
   <body>
   <div id=board>
-  <div id=sample></div>
-  </div>
-  
-  <script type="text/javascript">
-  
-  var board=document.getElementById('board');
-	
-  function positionBoard() {
-    var w=window.innerWidth;
-	var h=window.innerHeight;
-	if (w*1.5>h) { //the height is the problem
-	  w=h/1.5;
-	} else {
-	  h=w*1.5;
-	}
-	board.fx=w/100;	
-	board.style.left=((window.innerWidth-w)/2)+'px';
-	board.style.top=((window.innerHeight-h)/2)+'px';
-	board.style.width=w+'px';
-	board.style.height=h+'px';	
-  }
-  
-  function position(ob)
-  {
-    ob.style.left=(ob.x*board.fx)+'px';
-	ob.style.top=(ob.y*board.fx)+'px';	
-  }
-  
-  function setUp() {
-    positionBoard();
-    window.onresize=positionBoard;
-	makeWeaver(document.getElementById('sample'));
-	game();
-  }
-  
-  function makeWeaver(el)
-  {
-    el.eachFrame=function(gameTime,frameTime) {
-	  var cycle=gameTime%2000;
-	  if (cycle<1000)
-	     el.x=cycle/10;
-      if (cycle>1000)
-	     el.x=(2000-cycle)/10;
-		 
-	  var basey=Math.floor(gameTime/1000)*10;	  
-	  el.y=basey;	  
-	}
-  }
-  
-  
-  
-  function game()
-  {     
-     var lastTime=0;
-	 var firstTime=0;
-	 var gameTime=0;
-	 var gameLoop=function(timestamp)
-     {
-          var frameTime=10;	 
-	      if (lastTime) {
-		    frameTime=timestamp-lastTime;
-		  } 
-		  lastTime=timestamp;
-		  gameTime+=frameTime;
-          for (var i=0;i<board.children.length;i+=1) {
-		    var ob=board.children[i];
-			if (ob.eachFrame) ob.eachFrame(gameTime,frameTime);
-			position(ob);
-		  }
-		  window.requestAnimationFrame(gameLoop);
-     }
-	 window.requestAnimationFrame(gameLoop);
-  }  
-  
-  setUp();
-  
-  </script> 
+  </div>  
   </body>
+  <script src="sprites.js"></script>
+  <script src="objects.js"></script>
+  <script src="board.js"></script>
 </html>
