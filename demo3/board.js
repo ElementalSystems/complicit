@@ -81,7 +81,8 @@
 	//add the avatar
 	addOb(sprites.avatar,followControllerAction(),avatarFireAction());
 
-	//add the shadows		
+	//add the shadows	
+	
 	
 	
 	//create the section

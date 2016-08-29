@@ -95,8 +95,3 @@
 	   this.y=ystart+ys*gameTime/1000;
 	 } 
   }
-  
-  function ghostFollowAction(followArray)
-  {
-	  
-  }
