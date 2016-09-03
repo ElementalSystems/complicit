@@ -30,6 +30,15 @@
 	}
   }
   
+  function wiggleAction(timestart,xstart,ystart,xthrow,yhop,len)
+  {
+     return function(gameTime,frameTime) {	
+	   gameTime-=timestart;
+	   this.x=xstart+r_i(r_siso(r_pingpong(gameTime,len)),0,xthrow);	  
+	   this.y=ystart+(gameTime/len)*yhop;	  
+	}
+  }
+  
   function slideAction(timestart,xstart,ystart,xthrow,ythrow,len)
   {
      return function(gameTime,frameTime) {	
@@ -66,6 +75,7 @@
 	  }
   }
   
+  
   function avatarFireAction()
   {
 	  return function(gameTime,fireCount){
@@ -76,12 +86,53 @@
 	  }
   }
   
+  
+  function ghostFollowAction(followArray)
+  {
+	  return function(gameTime,frameTime) {	
+	     var f=idiv(gameTime,250);  //frame number in the array
+		 var r=(gameTime%250)/250;
+		 if (this.isDead) return;
+		 if (f+1>=followArray.length) {
+			 //we've run out of life so kill us
+			 killOb(this);
+			 return;
+		 }			 					 		 		 	  
+	     this.x=r_i(r,followArray[f].x,followArray[f+1].x);
+	     this.y=r_i(r,followArray[f].y,followArray[f+1].y);
+		 this.pointAng=r_i(r,followArray[f].pAng,followArray[f+1].pAng);
+		 this.display.style.transform='rotate('+(this.pointAng+Math.PI/2)+'rad)';			
+	 }  
+  }
+  
+  
+  function ghostFireAction(followArray)
+  {
+	  return function(gameTime,fireCount){
+		 if (this.isDead) return;
+		 var f=idiv(gameTime,250);  //frame number in the array		 
+         if (followArray[f].fire) 
+		   addOb(sprites.gBullet,bulletAction(this.x,this.y,this.pointAng,100),null);			
+		  
+	  }
+  }
+  
+  
   function regularFireAction(fireOff,fireCycle,bullet,speed)
   {
 	  return function(gameTime,fireCount) {
           if (!((fireCount+fireOff)%fireCycle)) 
             addOb(bullet,bulletAction(this.x,this.y,3.14/2,speed),null);					  
 		  
+	  }
+  }
+
+  function xZoneFireAction(zone,fireOff,fireCycle,bullet,speed)
+  {
+	  return function(gameTime,fireCount) {
+		  if (Math.abs(board.avatar.x-this.x)>zone) return;
+          if (!((fireCount+fireOff)%fireCycle)) 
+            addOb(bullet,bulletAction(this.x,this.y,3.14/2,speed),null);					  		  
 	  }
   }
 
@@ -96,7 +147,3 @@
 	 } 
   }
   
-  function ghostFollowAction(followArray)
-  {
-	  
-  }

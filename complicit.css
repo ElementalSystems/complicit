@@ -1,14 +1,169 @@
 body {
 	margin:0px;
 	padding:0px;
-	text-align:center;
-	background-color: #088;
+	text-align:center;	
+	background: linear-gradient(to right, #000 10%,#ffa 40%,#ffa 60%,#000 90%);
+	background-color: #400;
+	height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;	
+	overflow:hidden;
+	
 }
 
 #board {
 	background-color: #000;
 	position: absolute;
 	overflow:hidden;
+	display:none;
+	
+	box-sizing: border-box;
+	border: solid 2px #FFA;
+}
+
+div.zone {
+	background-color: rgba(0,0,0,.8);
+	box-sizing: border-box;
+	width:10em;
+	height:10em;
+	position:relative;
+	top: 0em;
+	
+	padding-top: 4em;
+	padding-left: .5em;
+	padding-right: .5em;
+	padding-bottom: .5em;
+	margin-left: auto;
+	margin-right:auto;
+	margin-top: 1em;
+	border-radius: 2em;
+    background-size: 100% 100%;	
+	font-size:15pt;
+	cursor: pointer;	
+	overflow: hidden;
+	transition: all 1s ease-in-out;
+}
+
+div.zone.sel {
+	padding-top: 1em;
+	width: 25em;
+	height: 25em;
+    background-color: #000;
+    
+}
+
+div.zb {
+	border: 2px solid #FF0;
+	background: #000;
+	color: #FF0;
+	cursor: pointer;
+	padding:.5em;
+	margin: 1em;
+	border-radius: .5em;
+}
+
+div.breaker {
+	height: 7em;	
+}
+
+#z0 {
+	color:#AFA;
+	border: solid 3px #0F0
+}
+
+#z1 {
+	color:#88F;
+	border: solid 3px #88F;
+}
+
+#z1.sel {
+	top: -10em;
+}
+
+#board.active {
+	display:block;
+}
+
+#logo {
+	position: absolute;
+	left:-4em;
+	top:0;
+	bottom:0;
+	width:  15em;
+	background-size: 100% auto;
+	background-repeat: repeat-y;
+	box-sizing: border-box;
+}
+
+#timer {
+	position: absolute;
+	right:1em;
+	top:1em;
+	width: 6em;
+	padding: .5em 0em;
+	border-radius: 1.5em;
+	background: rgba(0,0,0,.6);
+	border: #FF0 solid 2px;
+	color: #FF8;
+	font-size: 20pt;
+	font-family: monospace;	
+    display:none;
+
+}
+
+
+#timer.active {
+	display:block;
+}
+
+
+#board div.glitchtext {
+	color: #FFF;
+	font-size:130%;
+	display: block;
+	text-align:left;
+	font-family: monospace;
+	font-weight: bold;
+	line-height: 2em;
+}
+
+
+@keyframes glitch {
+  0% {
+	transform: scale(1,1);
+	background-color: #880;
+  }
+  10% {
+	transform: scale(.6,1);
+  }
+  20% {
+	transform: scale(1,.6);
+  }
+  
+  30% {
+	transform: scale(1.2,.8) rotate(7deg);
+	background-color: #000;
+  }  
+  60% {
+	background-color: #500;
+	transform: scale(.81,1) rotate(-5deg);
+  }
+  90% {
+	background-color: #AA0;
+	transform: scale(1,1);
+  }
+  100% {
+	background-color: #000;
+	
+  }
+}
+
+#board.glitch {
+   background-color: #550;
+   animation: glitch 2s 1 linear; 
+   
 }
 
 .boardobject {
@@ -56,7 +211,17 @@ body {
 	opacity: 0;	
   }
 }
-  
+
+  @keyframes throb {
+      0% {
+	    transform: scale(1,1);
+		opacity: .5;
+	  }
+	  100% {
+	    transform: scale(.9,.9);
+		opacity: 1;
+	  }
+  }
   
  .boardobject div.roll {
     animation: roll 1.5s infinite linear;
@@ -64,9 +229,15 @@ body {
  
  
  .boardobject div.rock {
-    animation: roll 3s infinite ease-in-out alternate;
+    animation: roll .7s infinite ease-in-out alternate;
+ }
+
+ .boardobject div.throb {
+    animation: throb .5s infinite ease-in-out alternate;
  }
 
  .boardobject.die div {
 	animation: diefold .5s 1 linear;	
  }
+
+ 
