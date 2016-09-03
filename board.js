@@ -38,17 +38,22 @@
 		y-=board.offsetTop;
 		board.control_x=x/board.fx;
 		board.control_y=y/board.fx;				
+	 };
+	 
+	 board.keyList=[];
+	 
+	 function keyEvent(keyCode,keyDown) {
+	    board.keyList[keyCode]=keyDown;
 	 }
+
 	 
 	 function handleStart(e) {
 	    board.control_active=true;
 		setTarget(e);					 
-        e.preventDefault();		
-		
+        e.preventDefault();				
 	 } 
 	 
-	 function handleEnd(e) {
-	    setTarget(e);				
+	 function handleEnd(e) {	    
 	    board.control_active=false;
 		e.preventDefault();		
 		
@@ -56,6 +61,7 @@
 	 
 	 function handleCancel(e) {
 	    board.control_active=false;
+		e.preventDefault();		
 	 } 
 	 
 	 function handleMove(e) {
@@ -73,6 +79,10 @@
     board.addEventListener("mouseup", handleEnd, false);
     board.addEventListener("mouseout", handleCancel, false);
     board.addEventListener("mousemove", handleMove, false);	
+	
+	board.onkeydown=function(evt) { keyEvent(evt.keyCode,1); evt.preventDefault(); return false; };
+    board.onkeyup=function(evt) { keyEvent(evt.keyCode,0); evt.preventDefault(); return false; };
+    
   }
   
   function position(ob)
@@ -116,14 +126,13 @@
   {
 	board.innerHTML="";
     board.gameTime=board.sectionStartTime;
-    		
+    board.focus();		
 	//add the avatar
 	addOb(sprites.avatar,followControllerAction(),avatarFireAction());
 
 	//add the shadows		
 	for (var i=0;i<board.shadows.length;i+=1)
-		addOb(sprites.ghost,ghostFollowAction(board.shadows[i]),ghostFireAction(board.shadows[i]));
-	
+		addOb(sprites.ghost,ghostFollowAction(board.shadows[i]),ghostFireAction(board.shadows[i]));	
 	
 	//create the section
 	initSection()		
@@ -142,7 +151,7 @@
 	board.classList.toggle('active',true);
 	board.timer.classList.toggle('active',true);
 	board.levelContent=zones[zoneindex];
-	board.levelPos=15;	
+	board.levelPos=0;	
 	board.scoreTime=0;
 	board.sectionStartTime=0;
 	board.shadows=[];
@@ -247,6 +256,7 @@
 		  //if a good guy is above -10
 		  if ((l[i].coltype==1)&&(l[i].y<10)&&(l[i].y>-10000)) killList.push(l[i]);
 		  else if ((l[i].coltype!=1)&&(l[i].y>180)) killList.push(l[i]);
+		  else if ((l[i].coltype==3)&&(l[i].y>100)) killList.push(l[i]);
 		  else if ((l[i].isDead)&&(l[i].removeTime<board.gameTime)) killList.push(l[i]);		  
 	  }
 	  for (var i=0;i<killList.length;i+=1) { 
@@ -280,7 +290,7 @@
 	  var l=board.children;
 	  board.enemyCount=0;
 	  for (var i=0;i<l.length;i+=1) {
-		  if (l[i].coltype==2) board.enemyCount+=1;
+		  if (l[i].coltype>=2) board.enemyCount+=1;
 		  if (l[i].coltype!=1) continue; //only do check for friendlys
 		  if (l[i].isDead) continue;
 		  for (var j=0;j<l.length;j+=1) {

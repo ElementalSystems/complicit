@@ -25,7 +25,16 @@ function wiggleTrail(sprite,length,xstart,xthrow,ystart,ythrow,fireCycle,timedro
 	  addOb(sprite,wiggleAction(i*timedrop,xstart,-ystart,xthrow,ythrow,time),regularFireAction(i,fireCycle,sprites.greenBullet,70));		
 }
 
+function finalSection(sprite)
+{
+	for (i=0;i<10;i+=1)
+	  addOb(sprite,bulletAction(30+Math.random()*40,-Math.random()*40,3.14/2,20+Math.random()*40));
+    addOb(sprites.levcomplete,bulletAction(50,-50,3.14/2,30));
+}
+
 var zoneA=[
+ function() { addOb(sprites.tuttouch,bulletAction(50,0,3.14/2,20)); },//tutorial text		
+
  function() { weaveBlock(sprites.grunt1,4,4,10,30,0,15,70,1000);},//intro mini block of slow invaders
  
  function() { weaveTrail(sprites.grunt2,15,5,90,0,10,40,150,2000);   //two slow windoing snakes behind each other in time -easy
@@ -52,7 +61,7 @@ var zoneA=[
  
  function() { weaveTrail(sprites.grunt2,10,5,40,10,20,60,250,2000); //lots of action flowy, hard - two beats
 	          weaveTrail(sprites.grunt2,10,95,-40,30,20,60,250,2000);
-              weaveTrail(sprites.grunt2,30,10,80,60,20,60,250,1800);},
+ -             weaveTrail(sprites.grunt2,30,10,80,60,20,60,250,1800);},
 
  function() { wiggleBlock(sprites.flow1,8,1,10,50,0,30,100,800); //slow flowing mutli-beat - medium
               wiggleBlock(sprites.flow1,8,1,70,-50,50,30,100,1500);
@@ -90,7 +99,9 @@ var zoneA=[
 	  wiggleTrail(sprites.flow2,20,10,30,100,30,100,200,2000);     
       weaveBlock(sprites.grunt1,3,3,45,30,50,20,50,1000);	  
 	  
- }	
+ },
+ function() { finalSection(sprites.zone0); }//victory
+  
 ];
 
 var zones=[zoneA];

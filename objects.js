@@ -58,19 +58,42 @@
 			  this.y=130;
 			  board.avatar=this;          
 		  }
+		  this.fireNow=false;
 		  if (board.control_active) {
 			//preprocess the co-ordinates
 			var x=(board.control_x-50)/100;
+			if (x<-.45) x=-.45;
+			if (x>.45) x=.45;						
 			var a=(board.control_y<100)?1:(150-board.control_y)/50;
-		    this.x=adjustTowards(this.x,50+x*100,.1*frameTime);
-		    //if (!this.a) this.a=0;			
-			this.a=adjustTowards(this.a,a,frameTime/1000);
-			x=(this.x-50)/100; //go back with our actual point
+		    this.x=adjustTowards(this.x,50+x*100,.05*frameTime);
+		    this.a=adjustTowards(this.a,a,frameTime/1000);			
+			this.fireNow=true;
+		  }
+		  if (board.keyList[68]||board.keyList[39]) {
+			 this.x=adjustTowards(this.x,97,.05*frameTime);		     
+			 this.fireNow=true;
+		  }
+		  if (board.keyList[65]||board.keyList[37]) {
+			 this.x=adjustTowards(this.x,3,.05*frameTime);		     
+			 this.fireNow=true;
+		  }
+		  if (board.keyList[87]||board.keyList[38]) {
+			 this.a=adjustTowards(this.a,1,frameTime/1000);		     
+			 this.fireNow=true;
+		  }
+		  if (board.keyList[83]||board.keyList[40]) {
+			 this.a=adjustTowards(this.a,0,frameTime/1000);		     
+			 this.fireNow=true;
+		  }
+		  if (board.keyList[32]||board.keyList[13]) {
+			 this.fireNow=true;
+		  }
+		  if (this.fireNow) { //we are active
+		    x=(this.x-50)/100; //go back with our actual point
 			var y=this.a*x*x+this.a; //basic space mapping y=ax^2+a from a-space to y-space
 			this.y=135-y*50;
 			this.pointAng=-Math.atan(2*this.a*x)-Math.PI/2; //gets the angle of the tangent from  dy/dx=2ax
-			this.display.style.transform='rotate('+(this.pointAng+Math.PI/2)+'rad)';
-			
+			this.display.style.transform='rotate('+(this.pointAng+Math.PI/2)+'rad)';			
 		  }
 	  }
   }
@@ -79,10 +102,10 @@
   function avatarFireAction()
   {
 	  return function(gameTime,fireCount){
-          if (board.control_active) 
+          if (this.fireNow) 
 			addOb(sprites.aBullet,bulletAction(this.x,this.y,this.pointAng,100),null);			
 		  //record the action
-	      board.shadowRec.push({x:this.x, y: this.y, pAng: this.pointAng, fire: board.control_active });
+	      board.shadowRec.push({x:this.x, y: this.y, pAng: this.pointAng, fire: this.fireNow });
 	  }
   }
   

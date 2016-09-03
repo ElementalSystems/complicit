@@ -187,12 +187,27 @@ sprites.logo=createOGO(400).fillStyle('#999900')
 sprites.zone0=createOGO(200).lineStyle('#00FF00').lineWidth(1)
 	        .text("\u237A-Zone",.15,.4,2)
 	        .echo(5,.1,.1,0,.5,0,60,1,.1,.7,0)
-			.makeSprite('none',25,0);
+			.makeSprite('lev',40,0);
 sprites.zone1=createOGO(200).fillStyle('#4444FF')
 	        .text("\u03B2-Zone",0,.3,2,true)
 	        .echo(20,0,0,.1,.1,0,-10,1,1,.4,0)
-			.makeSprite('none',25,0);
-				  
+			.makeSprite('lev',40,0);
+sprites.tuttouch=createOGO(200).lineStyle('#AA0').lineWidth(5).circle(0,0,0.45)
+	        .echo(40,0,0,0.4,0,0,90,1,.1,.3,0)		
+   	        .fillStyle('#FF8')
+	        .text("The avatar moves",0,.05,.9,true)
+	        .text("with your finger",0,-.05,.9,true)
+	        .makeSprite('tutorial',60,3);
+	        				
+sprites.levcomplete=createOGO(400).lineStyle('#FFAA00').lineWidth(3)
+	        .text("Zone Complete",0,0.1,1)
+			.lineStyle('#CCAA00').line(0,.03,.4,.03)
+	        .echo(40,0,0,0,-.1,0,0,1,.3,.3,0)
+			.lineStyle('#FFAA00')
+			.text("Zone Complete",0,0.1,1)
+			.mirror(true,true)
+	  		.makeSprite('tutorial',60,3);
+	        					
 
 }
 

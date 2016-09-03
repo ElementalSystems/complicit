@@ -17,10 +17,18 @@ body {
 	background-color: #000;
 	position: absolute;
 	overflow:hidden;
-	display:none;
+	display:block;
 	
 	box-sizing: border-box;
 	border: solid 2px #FFA;
+	transition: transform 1s ease-in-out;
+	transform: translateY(-100%);
+}
+
+
+#board.active {
+	display:block;	
+	transform: translateY(0);
 }
 
 div.zone {
@@ -82,9 +90,6 @@ div.breaker {
 	top: -10em;
 }
 
-#board.active {
-	display:block;
-}
 
 #logo {
 	position: absolute;
