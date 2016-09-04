@@ -150,6 +150,37 @@
 	  }
   }
 
+  function diveBombAction(fireOff,fireCycle,speed)
+  {
+	  return function(gameTime,fireCount) {
+          if (!((fireCount+fireOff)%fireCycle)) 
+            programOb(this,diveAction(this.x,this.y,speed),null);					  		  
+	  }
+  }
+
+  function diveAction(xstart,ystart,speed)
+  {  var xs=-xstart+board.avatar.x;
+     var ys=speed;
+	 return function(gameTime,frameTime) {	
+	   this.x=xstart+xs*gameTime/1000;
+	   this.y=ystart+ys*gameTime/1000;
+	 } 
+  }
+  
+  function regularFireAngleAction(fireOff,fireCycle,bullet,speed,angle)
+  {
+	  return function(gameTime,fireCount) {
+          if (!((fireCount+fireOff)%fireCycle)) {
+			var ang=angle*Math.random();
+			if (board.avatar.x>this.x)  
+                  ang*=-1;				
+            addOb(bullet,bulletAction(this.x,this.y,3.14/2+ang/180*3.14,speed),null);					  
+		  }
+		  
+	  }
+  }
+
+  
   function xZoneFireAction(zone,fireOff,fireCycle,bullet,speed)
   {
 	  return function(gameTime,fireCount) {
@@ -158,6 +189,8 @@
             addOb(bullet,bulletAction(this.x,this.y,3.14/2,speed),null);					  		  
 	  }
   }
+  
+  
 
   function bulletAction(xstart,ystart,angle,speed)
   {
@@ -170,3 +203,16 @@
 	 } 
   }
   
+  function sqAction(timestart,xstart,ystart,xthrow,ythrow,ytravel,len)
+  {
+     return function(gameTime,frameTime) {	
+	   gameTime-=timestart;
+	   this.x=xstart
+	          +r_i(r_siso(r_limit(r_cycle(gameTime,len),0,.25)),0,xthrow)
+			  -r_i(r_siso(r_limit(r_cycle(gameTime,len),.5,.75)),0,xthrow);	  
+	   this.y=ystart
+	          +r_i(r_siso(r_limit(r_cycle(gameTime,len),.25,.5)),0,ythrow)
+			  -r_i(r_siso(r_limit(r_cycle(gameTime,len),.75,1)),0,ythrow)	  
+	          +(gameTime/len)*ytravel;	  
+	}
+  }

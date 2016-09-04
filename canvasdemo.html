@@ -99,8 +99,15 @@
 	  base.echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
 		   .rotSym(3)
 		   .addDivSample('normal');
-		   
-	  base=createOGO(200).lineStyle('#00ff00').lineWidth(2)
+		
+      createOGO(200).lineStyle('#0000ff').lineWidth(2)
+	        .line(0,0,.15,.3).line(0,0,.3,.3).line(0,0,.3,.15)
+	  		.line(.15,.3,.3,.3).line(.3,.3,.3,.15)
+	        .echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
+		    .rotSym(3)
+		    .addDivSample('normal');
+				
+	  base=createOGO(200).lineStyle('#00aaff').lineWidth(2)
 	           		       .line(0,0,.15,.3).line(0,0,.3,.15)
 	  				       .line(.15,.3,.3,.3).line(.3,.3,.3,.15);
 	  	
@@ -127,25 +134,25 @@
 			.addDivSample('normal')
             .addDivSample('big');
   
-      bullet=createOGO(100).lineStyle('#FFAAAA').lineWidth(2);
-	  bullet.line(.4,0,0,.4)
+      createOGO(100).lineStyle('#DD00DD').lineWidth(3)
+	        .line(.4,0,0,.4)
 	        .echo(5,0,-.4,0,0,0,0,.2,1,.5,1)
 			.rotSym(6)
 	        .echo(5,0,0,0,0,0,0,2,1,0,1)
 			.addDivSample('normal');
-      bullet=createOGO(100).lineStyle('#FF9999').lineWidth(2);
-	  bullet.line(.4,0,0,.4)
+      createOGO(100).lineStyle('#9900FF').lineWidth(3)
+	        .line(.4,0,0,.4)
 	        .echo(5,0,-.4,0,0,0,0,.2,1,.5,1)
 			.rotSym(3)
 	        .echo(5,0,0,0,0,0,0,2,1,0,1)
-			.addDivSample('normal');
+			.addDivSample('roll');
             
   
-      bullet=createOGO(100).lineStyle('#FFFF00').lineWidth(2);
-	  bullet.circle(.1,0,.2)
+      bullet=createOGO(100).lineStyle('#AAF').lineWidth(2)
+	        .circle(.1,0,.2)
 	        .echo(10,0,-.1,0,-.15,0,45,.2,1,.5,1)
 			.rotSym(3)
-	        .addDivSample('bullet');
+	        .addDivSample('roll');
       bullet=createOGO(100).lineStyle('#00FF00').lineWidth(2);
 	  bullet.circle(.1,0,.2)
 	        .echo(10,0,-.1,0,-.15,0,180,.2,1,.5,1)
@@ -178,22 +185,15 @@
 			.addDivSample('big')
 	        .addDivSample('normal');
       
-	  createOGO(400).lineStyle('#FFAA00').lineWidth(3)
-	        .text("Zone Complete",0,0.1,1)
-			.lineStyle('#CCAA00').line(0,.03,.4,.03)
-	        .echo(40,0,0,0,-.1,0,0,1,.3,.3,0)
-			.lineStyle('#FFAA00')
-			.text("Zone Complete",0,0.1,1)
-			.mirror(true,true)
-	        .addDivSample('vbig');
-			
-	  bullet=createOGO(200).lineStyle('#AA0').lineWidth(5).circle(0,0,0.45)
-	        .echo(40,0,0,0.4,0,0,90,1,.1,.3,0)		
-   	        .fillStyle('#FF8')
-	        .text("The avatar moves",0,.05,.9,true)
-	        .text("with your finger",0,-.05,.9,true)
-	        .addDivSample('vbig')
-	        
+	  createOGO(200)
+	        .lineStyle('#FF3300').lineWidth(3).text("INCOMING",0,0,1.8)
+			.echo(40,0,0,0,0,0,180,1,1,.3,0)
+			.fillStyle('#FA0')
+			.text("INCOMING",0,0,1.8,true)
+			.addDivSample('vbig');
+		
+		
+            
 	
   
   </script> 

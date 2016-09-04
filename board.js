@@ -216,6 +216,13 @@
 	game();
   }
   
+  function programOb(el,action,fireAction)
+  {
+      el.eachFrame=action;
+	  el.fire=fireAction;
+	  el.createTime=board.gameTime;	  
+  }
+  
   function addOb(sprite,action,fireAction)
   {
       var el=document.createElement('div');
@@ -228,11 +235,10 @@
 	  el.style.height=(el.rad*2*board.fx)+'px';
 	  el.style.left=(-el.rad*board.fx)+'px';
 	  el.style.top=(-el.rad*board.fx)+'px';
+	
+      programOb(el,action,fireAction);
 	  
-      el.eachFrame=action;
-	  el.fire=fireAction;
-	  el.x=el.y=-10000;
-	  el.createTime=board.gameTime;
+   	  el.x=el.y=-10000;
 	  el.display=document.createElement('div');
 	  el.display.classList.add(sprite.displayCls);
 	  el.display.style.backgroundImage = 'url('+sprite.imgData+')';
@@ -256,7 +262,6 @@
 		  //if a good guy is above -10
 		  if ((l[i].coltype==1)&&(l[i].y<10)&&(l[i].y>-10000)) killList.push(l[i]);
 		  else if ((l[i].coltype!=1)&&(l[i].y>180)) killList.push(l[i]);
-		  else if ((l[i].coltype==3)&&(l[i].y>100)) killList.push(l[i]);
 		  else if ((l[i].isDead)&&(l[i].removeTime<board.gameTime)) killList.push(l[i]);		  
 	  }
 	  for (var i=0;i<killList.length;i+=1) { 

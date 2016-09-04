@@ -4,6 +4,8 @@ var OGO={
  circle: function(x,y,r) { this.ctx.beginPath(); this.ctx.arc(x, y, r, 0, 2 * Math.PI, false); this.ctx.stroke(); return this;},
  lineStyle: function(s) { this.ctx.strokeStyle=s;  return this;},
  fillStyle: function(s) { this.ctx.fillStyle=s;  return this;},
+
+
  lineWidth: function(w) { this.ctx.lineWidth=w/100;  return this;},
  text: function(t,x,y,h,fill) { 
    this.ctx.save();
@@ -78,11 +80,17 @@ var OGO={
 		displayCls: cls,
 		imgData: this.canvas.toDataURL()				
 	}
- }
- 
- 
- 
+ } 
 };
+
+function cgrad(ctx) {
+	var grd=ctx.createLinearGradient(-.5,-.5,.5,.5);
+	var stops=arguments.length-1;
+	var diff=1/(stops-1);
+	for (i=0;i<stops;i+=1)
+      grd.addColorStop(i*diff,argument[i+1]);
+    return grad;
+}
 
 function createOGO(res)
 {
@@ -101,6 +109,7 @@ function createOGO(res)
    
 	return ogo;
 }
+
 
 var sprites={};
 
@@ -192,22 +201,72 @@ sprites.zone1=createOGO(200).fillStyle('#4444FF')
 	        .text("\u03B2-Zone",0,.3,2,true)
 	        .echo(20,0,0,.1,.1,0,-10,1,1,.4,0)
 			.makeSprite('lev',40,0);
-sprites.tuttouch=createOGO(200).lineStyle('#AA0').lineWidth(5).circle(0,0,0.45)
-	        .echo(40,0,0,0.4,0,0,90,1,.1,.3,0)		
-   	        .fillStyle('#FF8')
-	        .text("The avatar moves",0,.05,.9,true)
-	        .text("with your finger",0,-.05,.9,true)
+var t1="The avatar moves"; var t2="with your touch";
+var t3="OR use <arrows>"; var t4="and hold <space>";
+sprites.tuttouch=createOGO(400).lineStyle('#A40').lineWidth(5).circle(0,0,0.45)
+	        .fillStyle('#AA4')
+	        .text(t1,0,.2,.9,true)
+	        .text(t2,0,.1,.9,true)
+	        .text(t3,0,-.1,.9,true)
+	        .text(t4,0,-.2,.9,true)
+	        .echo(80,0,0,0.4,0,0,90,1,.1,.2,0)		
+   	        .fillStyle('#FFA')
+	        .text(t1,0,.2,.9,true)
+	        .text(t2,0,.1,.9,true)
+	        .text(t3,0,-.1,.9,true)
+	        .text(t4,0,-.2,.9,true)
 	        .makeSprite('tutorial',60,3);
 	        				
 sprites.levcomplete=createOGO(400).lineStyle('#FFAA00').lineWidth(3)
 	        .text("Zone Complete",0,0.1,1)
 			.lineStyle('#CCAA00').line(0,.03,.4,.03)
 	        .echo(40,0,0,0,-.1,0,0,1,.3,.3,0)
-			.lineStyle('#FFAA00')
-			.text("Zone Complete",0,0.1,1)
+			.fillStyle('#FFAA00')
+			.text("Zone Complete",0,0.1,1,true)
 			.mirror(true,true)
 	  		.makeSprite('tutorial',60,3);
-	        					
-
+sprites.incoming=createOGO(400)
+	        .lineStyle('#FF3300').lineWidth(3).text("INCOMING",0,0,1.8)
+			.echo(40,0,0,0,0,0,180,1,1,.2,0)
+			.fillStyle('#FA0')
+			.text("INCOMING",0,0,1.8,true)
+			.makeSprite('roll',50,0);
+sprites.geo1=createOGO(100).lineStyle('#9900FF').lineWidth(3)
+	        .line(.4,0,0,.4)
+	        .echo(5,0,-.4,0,0,0,0,.2,1,.5,1)
+			.rotSym(3)
+	        .echo(5,0,0,0,0,0,0,2,1,0,1)			
+			.makeSprite('roll',10,2);
+sprites.geo2=createOGO(100).lineStyle('#DD00DD').lineWidth(3)
+	        .line(.4,0,0,.4)
+	        .echo(5,0,-.4,0,0,0,0,.2,1,.5,1)
+			.rotSym(6)
+	        .echo(5,0,0,0,0,0,0,2,1,0,1)
+			.makeSprite('rock',12,2,1);
+sprites.geo3=createOGO(200).lineStyle('#0000ff').lineWidth(2)
+	         .line(0,0,.15,.3).line(0,0,.3,.3).line(0,0,.3,.15)
+	  		 .line(.15,.3,.3,.3).line(.3,.3,.3,.15)
+	         .echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
+		     .rotSym(3)
+			 .makeSprite('roll',15,2);
+sprites.geo4=createOGO(200).lineStyle('#5555FF').lineWidth(2)
+	        .line(.2,0,0,.4)
+	        .mirror(true,false)
+	        .echo(10,0,-.4,0,0,0,0,.2,1,.5,1)
+			.echo(5,0,0,0,0,0,0,2,1,.1,1)
+			.makeSprite('throb2',15,2);
+			
+sprites.bbullet=createOGO(100).lineStyle('#AAF').lineWidth(2)
+	        .circle(.1,0,.2)
+	        .echo(10,0,-.1,0,-.15,0,45,.2,1,.5,1)
+			.rotSym(3)
+			.makeSprite('roll',8,2);
+sprites.blueBoss=createOGO(200).lineStyle('#0055ff').lineWidth(2)
+	        .line(0,0,.15,.3).line(0,0,.3,.15)
+	  		.line(.15,.3,.3,.3).line(.3,.3,.3,.15)
+	  	    .rotSym(8)
+	        .echo(8,0,0,0,0,0,0,0.2,1,0,1)
+	        .makeSprite('throb',25,2,8);
+	  			
 }
 

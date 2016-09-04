@@ -35,7 +35,8 @@ function finalSection(sprite)
 var zoneA=[
  function() { addOb(sprites.tuttouch,bulletAction(50,0,3.14/2,20)); },//tutorial text		
 
- function() { weaveBlock(sprites.grunt1,4,4,10,30,0,15,70,1000);},//intro mini block of slow invaders
+ function() {  addOb(sprites.incoming,bulletAction(50,0,3.14/2,100));
+               weaveBlock(sprites.grunt1,4,4,10,30,0,15,70,1000);},//intro mini block of slow invaders
  
  function() { weaveTrail(sprites.grunt2,15,5,90,0,10,40,150,2000);   //two slow windoing snakes behind each other in time -easy
 	          weaveTrail(sprites.grunt2,15,95,-90,40,10,40,150,2000); },
@@ -100,8 +101,81 @@ var zoneA=[
       weaveBlock(sprites.grunt1,3,3,45,30,50,20,50,1000);	  
 	  
  },
- function() { finalSection(sprites.zone0); }//victory
-  
+ function() { finalSection(sprites.zone0); }//victory  
 ];
 
-var zones=[zoneA];
+function sqBlock(sprite,rows,cols,xstart,xthrow,ystart,ythrow,ytravel,fireCycle,time,lag)
+{
+	if (!lag) lag=0;
+	for (var i=0;i<rows;i+=1)
+	  for (var j=0;j<cols;j+=1)
+	      addOb(sprite,sqAction((i+j)*lag,xstart+sprite.size*j,-ystart-sprite.size*i,xthrow,ythrow,ytravel,time),regularFireAngleAction(i+j,fireCycle,sprites.bbullet,50,20));		
+}
+
+function sqTrail(sprite,num,xstart,xthrow,ystart,ythrow,ytravel,fireCycle,timegap,time)
+{
+	for (var i=0;i<num;i+=1)	  
+	      addOb(sprite,sqAction(timegap*i,xstart,-ystart,xthrow,ythrow,ytravel,time),regularFireAngleAction(i,fireCycle,sprites.bbullet,50,20));		
+}
+
+function sqDBlock(sprite,rows,cols,xstart,xthrow,ystart,ythrow,ytravel,fireCycle,time,lag)
+{
+	if (!lag) lag=0;
+	for (var i=0;i<rows;i+=1)
+	  for (var j=0;j<cols;j+=1)
+	      addOb(sprite,sqAction((i+j)*lag,xstart+sprite.size*j,-ystart-sprite.size*i,xthrow,ythrow,ytravel,time),diveBombAction(i+j,fireCycle,90));		
+}
+
+function blueBossLine(len,fireCycle) {
+	for (var i=0;i<len;i+=1)
+		addOb(sprites.blueBoss,wiggleAction(i*500,10,10,80,10,2000),xZoneFireAction(20,0,fireCycle,sprites.bbullet,40));
+}
+
+var zoneB=[
+
+ function() {  addOb(sprites.incoming,bulletAction(50,-50,3.14/2,100));
+               sqBlock(sprites.geo1,4,8,10,10,0,10,10,50,1500);},  //intro mini block of slow sq invaders
+
+function() {  sqTrail(sprites.geo3,30,5,90,0,30,20,100,150,3000);},  //rolling of geo3 invaders -easy
+function() {  sqBlock(sprites.geo2,3,3,5,60,20,30,20,20,2000); },  //some small but fast and aggressive geo2 invaders -medium
+
+function() {  sqTrail(sprites.geo3,15,5,40,0,20,40,60,250,2000);
+              sqTrail(sprites.geo3,15,95,-40,0,20,40,80,250,2000); },  //2 lines folding of geo3 invaders -easy
+function() {  sqTrail(sprites.geo3,30,5,90,0,30,20,20,50,5000);},  //serious rolling of geo3 invaders -medium
+ function() {  sqDBlock(sprites.geo4,6,4,5,40,0,40,20,50,5000,100);
+               sqDBlock(sprites.geo4,6,4,5,40,0,40,20,50,4000,100);},  //falling blue -medium
+ function() {  sqBlock(sprites.geo2,6,4,5,60,0,40,40,50,5000);},  //serious block of geo2 invaders -medium
+ function() {  sqBlock(sprites.geo2,2,5,5,40,0,40,40,50,5000);
+               sqBlock(sprites.geo1,2,5,5,55,25,40,40,50,5000);
+               sqBlock(sprites.geo2,2,5,5,40,50,40,40,50,5000);
+               },  //mixed geo type - hard
+ function() {  sqBlock(sprites.geo2,6,4,5,60,0,40,40,50,5000);},  //serious block of geo2 invaders -medium
+ function() {  sqDBlock(sprites.geo4,4,4,5,40,0,40,20,20,2000,120); },  //super fast bombers falling blue -medium
+ function() {  blueBossLine(2,2); }, //medium - first boss
+ function() {  sqBlock(sprites.geo2,2,2,5,25,0,30,30,20,3000);
+               sqBlock(sprites.geo2,2,2,80,-25,0,30,30,20,3000); 
+			   sqBlock(sprites.geo2,2,2,30,35,60,30,30,20,1500); 
+			   },  //three 2 x 2 group of geo2 - one out of sync - medium
+ 
+ function() { //green bosses and some blue fluff - very hard
+ 	  addOb(sprites.boss1,wiggleAction(0,10,10,80,5,3000),xZoneFireAction(20,0,2,sprites.bigGreenBullet,40));		
+	  addOb(sprites.boss1,wiggleAction(1500,10,10,80,5,3000),xZoneFireAction(20,1,2,sprites.bigGreenBullet,40));		
+	  sqBlock(sprites.geo1,3,4,5,25,50,10,20,50,2000,50);             
+	  sqTrail(sprites.geo3,15,55,20,0,30,20,60,50,1500);
+ },
+ function() {  
+              wiggleTrail(sprites.flow2,15,10,80,30,30,200,100,3000);
+			  wiggleTrail(sprites.flow2,15,90,-80,60,30,200,100,3000);              
+			  sqBlock(sprites.geo1,3,4,5,25,0,10,20,50,2000,50);
+              sqBlock(sprites.geo1,3,4,60,-25,15,10,20,50,2000,50);			  
+           },  //two blocks of geo1's throbbing plus two bright snakes - hard
+ function() { 
+   blueBossLine(5,4); 	 		
+   sqDBlock(sprites.geo4,6,6,5,40,50,40,20,80,4000,100);
+ },
+ function() { finalSection(sprites.zone1); }//victory  
+ 			   
+]; 
+
+
+var zones=[zoneA,zoneB];
