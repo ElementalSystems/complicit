@@ -124,10 +124,10 @@
 	     this.x=r_i(r,followArray[f].x,followArray[f+1].x);
 	     this.y=r_i(r,followArray[f].y,followArray[f+1].y);
 		 this.pointAng=r_i(r,followArray[f].pAng,followArray[f+1].pAng);
-		 this.display.style.transform='rotate('+(this.pointAng+Math.PI/2)+'rad)';			
+		 if (!isNaN(this.pointAng))
+		   this.display.style.transform='rotate('+(this.pointAng+Math.PI/2)+'rad)';			
 	 }  
   }
-  
   
   function ghostFireAction(followArray)
   {

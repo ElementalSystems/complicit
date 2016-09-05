@@ -1,5 +1,6 @@
   
   var board=document.getElementById('board');
+  var meta=document.getElementById('levsel');
   board.lastZoneIndex=-1;
      	
   function positionBoard() {
@@ -87,7 +88,8 @@
   
   function position(ob)
   {
-	ob.style.transform='translate3D('+(ob.x*board.fx)+'px,'+(ob.y*board.fx)+'px,0)';    
+	if (ob.x!==undefined)
+	  ob.style.transform='translate3D('+(ob.x*board.fx)+'px,'+(ob.y*board.fx)+'px,0)';    
   }
   
   function avatarKilled()
@@ -111,15 +113,13 @@
 		  nd.classList.add('glitchtext');
 		  nd.innerHTML='---- Restoring last Stable State ----';
 		  board.appendChild(nd);		  	     
-	  },1500);	  
+	  },1500);
 	  setTimeout(function(){
 		  board.shadows.push(board.shadowRec);
 		  board.glitch=false;
 		  board.classList.remove('glitch');
 	      resetSection();
-	  },2500);
-	  
-	  
+	  },2500);	  	  
   }
   
   function resetSection()
@@ -135,7 +135,7 @@
 		addOb(sprites.ghost,ghostFollowAction(board.shadows[i]),ghostFireAction(board.shadows[i]));	
 	
 	//create the section
-	initSection()		
+	initSection();		
   }
   
   function initSection()
@@ -149,8 +149,10 @@
   function startZone(zoneindex)  
   {	
 	board.classList.toggle('active',true);
+	meta.classList.toggle('hide',true);
 	board.timer.classList.toggle('active',true);
 	board.levelContent=zones[zoneindex];
+	board.zoneID=zoneindex;
 	board.levelPos=0;	
 	board.scoreTime=0;
 	board.sectionStartTime=0;
@@ -168,10 +170,11 @@
 	 //hide board
 	 board.classList.toggle('active',false);
 	 board.timer.classList.toggle('active',false);
-	 localStorage.setItem('last_z0',board.scoreTime);
-	 var best=Number(localStorage.getItem('best_z0'));
+	 meta.classList.toggle('hide',false);
+	 localStorage.setItem('last_z'+board.zoneID,board.scoreTime);
+	 var best=Number(localStorage.getItem('best_z'+board.zoneID));
 	 if ((!best)||(best>board.scoreTime))
-	    localStorage.setItem('best_z0',board.scoreTime);
+	    localStorage.setItem('best_z'+board.zoneID,board.scoreTime);
      updateLevSel();	
   }
   
@@ -235,9 +238,8 @@
 	  el.style.height=(el.rad*2*board.fx)+'px';
 	  el.style.left=(-el.rad*board.fx)+'px';
 	  el.style.top=(-el.rad*board.fx)+'px';
-	
-      programOb(el,action,fireAction);
 	  
+      programOb(el,action,fireAction);	  
    	  el.x=el.y=-10000;
 	  el.display=document.createElement('div');
 	  el.display.classList.add(sprite.displayCls);

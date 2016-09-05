@@ -81,33 +81,10 @@
 		  .rotSym(2)
 		  .addDivSample('bullet');
 	  
-	  bullet=createOGO(50).lineStyle('#ffff00').lineWidth(2)
-	           		       .line(0,0,0,-.4);
-	  bullet
-	      .echo(30,0,0,0,0,0,90,1,.6,.1,.8)
-		  .rotSym(4)
-		  .addDivSample('bullet');
 	  
 	  
-	  var base=createOGO(200).lineStyle('#00aaff').lineWidth(2)
-	           		       .line(0,0,.15,.3).line(0,0,.3,.3).line(0,0,.3,.15)
-	  				       .line(.15,.3,.3,.3).line(.3,.3,.3,.15);
-	  
-	  base.rotSym(3)
-		  .echo(8,0,0,0,0,0,-45,.8,1.2,1,0)
-		  .addDivSample('normal');
-	  base.echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
-		   .rotSym(3)
-		   .addDivSample('normal');
-		
-      createOGO(200).lineStyle('#0000ff').lineWidth(2)
-	        .line(0,0,.15,.3).line(0,0,.3,.3).line(0,0,.3,.15)
-	  		.line(.15,.3,.3,.3).line(.3,.3,.3,.15)
-	        .echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
-		    .rotSym(3)
-		    .addDivSample('normal');
-				
-	  base=createOGO(200).lineStyle('#00aaff').lineWidth(2)
+	  		
+	  base=createOGO(200).lineGrad('#AAF','#00F').lineWidth(2)
 	           		       .line(0,0,.15,.3).line(0,0,.3,.15)
 	  				       .line(.15,.3,.3,.3).line(.3,.3,.3,.15);
 	  	

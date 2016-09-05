@@ -4,8 +4,7 @@ var OGO={
  circle: function(x,y,r) { this.ctx.beginPath(); this.ctx.arc(x, y, r, 0, 2 * Math.PI, false); this.ctx.stroke(); return this;},
  lineStyle: function(s) { this.ctx.strokeStyle=s;  return this;},
  fillStyle: function(s) { this.ctx.fillStyle=s;  return this;},
-
-
+ lineGrad: function(c1,c2) { this.ctx.strokeStyle=cgrad(this.ctx,.5,c1,c2);  return this;},
  lineWidth: function(w) { this.ctx.lineWidth=w/100;  return this;},
  text: function(t,x,y,h,fill) { 
    this.ctx.save();
@@ -83,13 +82,11 @@ var OGO={
  } 
 };
 
-function cgrad(ctx) {
-	var grd=ctx.createLinearGradient(-.5,-.5,.5,.5);
-	var stops=arguments.length-1;
-	var diff=1/(stops-1);
-	for (i=0;i<stops;i+=1)
-      grd.addColorStop(i*diff,argument[i+1]);
-    return grad;
+function cgrad(ctx,s,c1,c2) {
+	var grd=ctx.createRadialGradient(0,0,0,0,0,s);
+	grd.addColorStop(0,c1);
+	grd.addColorStop(1,c2);
+	return grd;
 }
 
 function createOGO(res)
@@ -148,8 +145,8 @@ sprites.gBullet=createOGO(50)
 	  .rotSym(5)
 	  .makeSprite('bullet',5,1);
 sprites.grunt1=createOGO(150)
-	.lineStyle('#55AA00').lineWidth(2).circle(.1,.1,.1)
-	.lineStyle('#00FF00').circle(.3,0,.1)
+	.lineStyle('#5F0').lineWidth(2).circle(.1,.1,.1)
+	.lineGrad('#000','#0F0').circle(.3,0,.1)
 	.echo(80,0,0,0,0,0,360,1,1,0,.5)
 	.rotSym(2)
 	.makeSprite('roll',10,2);
@@ -215,8 +212,7 @@ sprites.tuttouch=createOGO(400).lineStyle('#A40').lineWidth(5).circle(0,0,0.45)
 	        .text(t2,0,.1,.9,true)
 	        .text(t3,0,-.1,.9,true)
 	        .text(t4,0,-.2,.9,true)
-	        .makeSprite('tutorial',60,3);
-	        				
+	        .makeSprite('tutorial',60,3);	        				
 sprites.levcomplete=createOGO(400).lineStyle('#FFAA00').lineWidth(3)
 	        .text("Zone Complete",0,0.1,1)
 			.lineStyle('#CCAA00').line(0,.03,.4,.03)
@@ -225,12 +221,12 @@ sprites.levcomplete=createOGO(400).lineStyle('#FFAA00').lineWidth(3)
 			.text("Zone Complete",0,0.1,1,true)
 			.mirror(true,true)
 	  		.makeSprite('tutorial',60,3);
-sprites.incoming=createOGO(400)
+sprites.incoming=createOGO(500)
 	        .lineStyle('#FF3300').lineWidth(3).text("INCOMING",0,0,1.8)
 			.echo(40,0,0,0,0,0,180,1,1,.2,0)
 			.fillStyle('#FA0')
 			.text("INCOMING",0,0,1.8,true)
-			.makeSprite('roll',50,0);
+			.makeSprite('roll',60,0);
 sprites.geo1=createOGO(100).lineStyle('#9900FF').lineWidth(3)
 	        .line(.4,0,0,.4)
 	        .echo(5,0,-.4,0,0,0,0,.2,1,.5,1)
@@ -243,12 +239,12 @@ sprites.geo2=createOGO(100).lineStyle('#DD00DD').lineWidth(3)
 			.rotSym(6)
 	        .echo(5,0,0,0,0,0,0,2,1,0,1)
 			.makeSprite('rock',12,2,1);
-sprites.geo3=createOGO(200).lineStyle('#0000ff').lineWidth(2)
-	         .line(0,0,.15,.3).line(0,0,.3,.3).line(0,0,.3,.15)
-	  		 .line(.15,.3,.3,.3).line(.3,.3,.3,.15)
-	         .echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
-		     .rotSym(3)
-			 .makeSprite('roll',15,2);
+sprites.geo3=createOGO(200).lineGrad('#00F','#F0F').lineWidth(2)
+	           		       .line(0,0,.15,.3).line(0,0,.3,.3).line(0,0,.3,.15)
+	  				       .line(.15,.3,.3,.3).line(.3,.3,.3,.15)	  
+						   .rotSym(2)
+		                   .echo(8,0,0,0,0,0,-45,.8,1.2,1,0)
+		                   .makeSprite('rock',15,2);
 sprites.geo4=createOGO(200).lineStyle('#5555FF').lineWidth(2)
 	        .line(.2,0,0,.4)
 	        .mirror(true,false)
@@ -261,11 +257,11 @@ sprites.bbullet=createOGO(100).lineStyle('#AAF').lineWidth(2)
 	        .echo(10,0,-.1,0,-.15,0,45,.2,1,.5,1)
 			.rotSym(3)
 			.makeSprite('roll',8,2);
-sprites.blueBoss=createOGO(200).lineStyle('#0055ff').lineWidth(2)
-	        .line(0,0,.15,.3).line(0,0,.3,.15)
+sprites.blueBoss=createOGO(200).lineStyle('#0000ff').lineWidth(2).lineGrad('#FFF','#00F')
+	        .line(0,0,.15,.3).line(0,0,.3,.3).line(0,0,.3,.15)
 	  		.line(.15,.3,.3,.3).line(.3,.3,.3,.15)
-	  	    .rotSym(8)
-	        .echo(8,0,0,0,0,0,0,0.2,1,0,1)
+	        .echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
+		    .rotSym(3)		
 	        .makeSprite('throb',25,2,8);
 	  			
 }

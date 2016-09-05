@@ -22,13 +22,22 @@ body {
 	box-sizing: border-box;
 	border: solid 2px #FFA;
 	transition: transform 1s ease-in-out;
-	transform: translateY(-100%);
+	transform: translateY(-110%);
 }
 
 
 #board.active {
 	display:block;	
 	transform: translateY(0);
+}
+
+#levsel {
+	transition: transform 1s ease-in-out;
+	transform: translateY(0);
+}
+
+#levsel.hide{
+	transform: translateY(+110%);	
 }
 
 div.zone {
@@ -48,7 +57,7 @@ div.zone {
 	margin-top: 1em;
 	border-radius: 2em;
     background-size: 100% 100%;	
-	font-size:15pt;
+	font-size:14pt;
 	cursor: pointer;	
 	overflow: hidden;
 	transition: all 1s ease-in-out;
@@ -56,8 +65,8 @@ div.zone {
 
 div.zone.sel {
 	padding-top: 1em;
-	width: 25em;
-	height: 25em;
+	width: 20em;
+	height: 22em;
     background-color: #000;
     
 }
@@ -73,7 +82,7 @@ div.zb {
 }
 
 div.breaker {
-	height: 7em;	
+	height: 5em;	
 }
 
 #z0 {
@@ -141,22 +150,22 @@ div.breaker {
 	background-color: #880;
   }
   10% {
-	transform: scale(.6,1);
+	transform: scale(1.6,1) rotate(3deg);
   }
   20% {
-	transform: scale(1,.6);
+	transform: scale(1,1.6);
   }
   
   30% {
-	transform: scale(1.2,.8) rotate(7deg);
+	transform: scale(1.2,1.2) rotate(3deg);
 	background-color: #000;
   }  
   60% {
 	background-color: #500;
-	transform: scale(.81,1) rotate(-5deg);
+	transform: scale(1.1,1) rotate(-3deg);
   }
   90% {
-	background-color: #AA0;
+	background-color: #050;
 	transform: scale(1,1);
   }
   100% {
