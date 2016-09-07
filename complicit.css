@@ -99,6 +99,15 @@ div.breaker {
 	top: -10em;
 }
 
+#z2 {
+	color:#F44;
+	border: solid 3px #F44;
+}
+
+#z2.sel {
+	top: -20em;
+}
+
 
 #logo {
 	position: absolute;
@@ -113,17 +122,19 @@ div.breaker {
 
 #timer {
 	position: absolute;
-	right:1em;
-	top:1em;
-	width: 6em;
-	padding: .5em 0em;
-	border-radius: 1.5em;
+	right:-.1em;
+	top:-.1em;
+	width: 5em;
+	padding: 0.2em 0.2em 0.2em 0em;
+	border-radius: 0em 0em 0em 1.5em;
 	background: rgba(0,0,0,.6);
-	border: #FF0 solid 2px;
+	border: #FF0  3px;
 	color: #FF8;
 	font-size: 20pt;
 	font-family: monospace;	
     display:none;
+	text-align:right;
+	
 
 }
 
@@ -218,6 +229,16 @@ div.breaker {
   }
 }
 
+
+@keyframes roll90 {
+  0% {
+	transform: rotate(0deg);
+  }
+  100% {
+	transform: rotate(90deg);
+  }
+}
+
 @keyframes diefold {
   0% {
 	transform: translateY(0) scale(1,1);
@@ -252,6 +273,10 @@ div.breaker {
  
  .boardobject div.roll120 {
     animation: roll120 .7s infinite ease-in-out;
+ }
+ 
+ .boardobject div.roll90 {
+    animation: roll90 .6s infinite ease-in;
  }
  
  

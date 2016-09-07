@@ -179,6 +179,20 @@
 		  
 	  }
   }
+  
+  function dualFireAngleAction(fireOff,fireCycle,bullet,speed,angle)
+  {
+	  return function(gameTime,fireCount) {
+          if (!((fireCount+fireOff)%fireCycle)) {
+			var ang=angle*Math.random();
+			if (board.avatar.x>this.x)  
+                  ang*=-1;				
+            addOb(bullet,bulletAction(this.x,this.y,3.14/2+ang/180*3.14,speed),null);					 
+            addOb(bullet,bulletAction(this.x,this.y,3.14/2+ang/180*3.14/2,speed*.9),null);					  			
+		  }
+		  
+	  }
+  }
 
   
   function xZoneFireAction(zone,fireOff,fireCycle,bullet,speed)

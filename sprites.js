@@ -5,6 +5,7 @@ var OGO={
  lineStyle: function(s) { this.ctx.strokeStyle=s;  return this;},
  fillStyle: function(s) { this.ctx.fillStyle=s;  return this;},
  lineGrad: function(c1,c2) { this.ctx.strokeStyle=cgrad(this.ctx,.5,c1,c2);  return this;},
+ fillGrad: function(c1,c2) { this.ctx.fillStyle=cgrad(this.ctx,15,c1,c2);  return this;},
  lineWidth: function(w) { this.ctx.lineWidth=w/100;  return this;},
  text: function(t,x,y,h,fill) { 
    this.ctx.save();
@@ -112,25 +113,30 @@ var sprites={};
 
 
 function prepSprites() {
-sprites.avatar=createOGO(200).lineWidth(2)
-	  .lineStyle('#FFAA00').line(.2,.35,.25,.5)
-	  .lineStyle('#FF0000').line(.1,.4,.2,.5)
-	  .echo(5,-.5,0,0,0,0,0,1,1,1,1)
-	  .echo(3,0,-.3,0,0,0,0,1,1,0,1)
-	  .lineWidth(3).lineStyle('#FFFF99')
-	  .line(.4,.4,0,-.4).line(.4,.4,0,.2).circle(0,0,.1)
-	  .mirror(true,false)
-	  .echo(10,0,0,0,0,0,0,.1,1,0.1,1)
-	  .makeSprite('normal',15,1);
-sprites.ghost=createOGO(200).lineWidth(2)
-	  .lineStyle('#AAAAAA').line(.2,.35,.25,.5)
-	  .lineStyle('#CCCCCC').line(.1,.4,.2,.5)
-	  .echo(5,-.5,0,0,0,0,0,1,1,1,1)
-	  .echo(3,0,-.3,0,0,0,0,1,1,0,1)
-	  .lineWidth(3).lineStyle('#AAAAAA')
-	  .line(.4,.4,0,-.4).line(.4,.4,0,.2).circle(0,0,.1)
-	  .mirror(true,false)
-	  .echo(5,0,0,0,0,0,0,.1,1,0.1,.5)
+sprites.avatar=createOGO(200)
+	      .lineWidth(5).lineGrad('#FA0','#F00')
+		  .line(0,.2,0,.3)
+		  .echo(5,0,0,.3,.2,0,0,1,.5,1,1)			
+		  .lineWidth(3).lineGrad('#FFA','#FF0')
+	      .line(.4,.4,0,-.4)
+		  .line(0,-.2,.2,.2)
+		  .circle(.1,.1,.03)
+		  .lineWidth(6).line(.3,.4,.3,0)
+		  .mirror(true,false)
+	      .echo(5,0,0,0,.2,0,0,1,1,1,0)
+          .makeSprite('normal',15,1);
+
+sprites.ghost=createOGO(200)
+	      .lineWidth(5).lineGrad('#FA0','rgba(255,0,0,0)')
+		  .line(0,.2,0,.3)
+		  .echo(5,0,0,.3,.2,0,0,1,.5,1,1)			
+		  .lineWidth(3).lineGrad('#FFF','#FF8')
+	      .line(.4,.4,0,-.4)
+		  .line(0,-.2,.2,.2)
+		  .circle(.1,.1,.03)
+		  .lineWidth(6).line(.3,.4,.3,0)
+		  .mirror(true,false)
+	      .echo(3,0,0,0,.2,0,0,1,1,.3,0)
 	  .makeSprite('normal',15,1);
 sprites.aBullet=createOGO(50)
 	   .lineStyle('#ffffff').lineWidth(2).line(0,0,.3,-.3)
@@ -200,6 +206,13 @@ sprites.zone1=createOGO(400).fillStyle('#4444FF')
 	        .echo(20,0,0,.2,.2,0,-20,1,1,.4,0)
 			.fillStyle('#99F').text("\u03B2-Zone",0,.25,2,true)
 			.makeSprite('lev',40,0);
+sprites.zone2=createOGO(400)
+	      .fillGrad('#500','#F08').text("\u03A9",-.2,.2,3,true)	       
+		  .echo(40,0,0,0,0,90,0,.5,1,.1,.4)			
+		  .rotSym(4)
+	      .lineStyle('#D00').text("\u03A9",-.2,.2,3.2)	       
+		  .fillStyle('#F00').text("zone",0.1,0.25,1.5,true)	       
+		  .makeSprite('lev',40,0);
 var t1="The avatar moves"; var t2="with your touch";
 var t3="OR use <arrows>"; var t4="and hold <space>";
 sprites.tuttouch=createOGO(400).lineStyle('#A40').lineWidth(5).circle(0,0,0.45)
@@ -265,6 +278,25 @@ sprites.blueBoss=createOGO(200).lineStyle('#0000ff').lineWidth(2).lineGrad('#FFF
 	        .echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
 		    .rotSym(3)		
 	        .makeSprite('roll120',25,2,8);
-	  			
+sprites.red1=createOGO(200).lineGrad('#F00','#505').lineWidth(3)
+					   .line(0,0,.15,.3).line(0,0,.3,.15)
+					   .line(.15,.3,.3,.3).line(.3,.3,.3,.15)
+	       .echo(10,-.4,.2,-.4,-.5,0,0,1.2,1,0,.8)						 
+		   .rotSym(4)
+		   .makeSprite('roll90',9,2);
+sprites.red2=createOGO(200).lineGrad('#F88','#F00').lineWidth(2)
+	           		       .line(0,0,.15,.3).line(0,0,.3,.15)
+	  				       .line(.15,.3,.3,.3).line(.3,.3,.3,.15)
+						   .echo(30,-0.2,-0.2,0,0,0,25,1,1,0,.2)						 
+		   .rotSym(3)
+		   .mirror(false,true)		   
+		   .makeSprite('rock',15,2);
+sprites.rbullet=createOGO(50).lineStyle('#F00').lineWidth(10)
+	        .circle(.3,0,.05).lineStyle('#F8A').circle(.1,0,.01)
+	        .echo(10,0,0,0,0,90,0,.5,1,.1,.5)
+			.rotSym(3)
+			.makeSprite('roll',6,2);
+	        
+		   	  			
 }
 

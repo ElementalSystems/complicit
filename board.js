@@ -203,6 +203,7 @@
   {
      updateLSZone(0);	
 	 updateLSZone(1);	
+	 updateLSZone(2);	
   }
   
   function setUp() {
@@ -251,7 +252,7 @@
   
   function testCollision(o1,o2)
   {
-	  var distlimit=Math.pow(o1.rad+o2.rad,2);
+	  var distlimit=Math.pow(o1.rad+o2.rad,2)*.9;
 	  var dist=Math.pow(o1.x-o2.x,2)+Math.pow(o1.y-o2.y,2);
 	  return dist<distlimit;
   }

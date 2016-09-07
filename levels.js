@@ -195,4 +195,47 @@ function() {  sqTrail(sprites.geo3,15,5,40,0,20,40,100,250,2000);
 ]; 
 
 
-var zones=[zoneA,zoneB];
+function sqRedBlock(sprite,rows,cols,xstart,xthrow,ystart,ythrow,ytravel,fireCycle,time,lag)
+{
+	if (!lag) lag=0;
+	for (var i=0;i<rows;i+=1)
+	  for (var j=0;j<cols;j+=1)
+	      addOb(sprite,sqAction((i+j)*lag,xstart+sprite.size*j,-ystart-sprite.size*i,xthrow,ythrow,ytravel,time),dualFireAngleAction(i+j,fireCycle,sprites.rbullet,50,30));		
+}
+
+function wiggleRedTrail(sprite,length,xstart,xthrow,ystart,ythrow,fireCycle,timedrop,time)
+{
+	for (var i=0;i<length;i+=1)
+	  addOb(sprite,wiggleAction(i*timedrop,xstart,-ystart,xthrow,ythrow,time),dualFireAngleAction(i,fireCycle,sprites.rbullet,70,30));		
+}
+
+
+var zoneC=[
+ 
+ 
+ function() {  sqRedBlock(sprites.red2,2,2,5,25,0,30,30,30,3000,100);
+               sqRedBlock(sprites.red2,2,2,80,-25,0,30,30,30,3000,100); 
+			   sqRedBlock(sprites.red2,3,3,30,35,60,30,30,30,2000,100); 
+			   sqTrail(sprites.geo3,30,20,60,0,30,40,50,100,5000);
+ },  //three 2 x 2 group of red1 
+ 
+ 
+ function() {  incoming();			  
+               sqRedBlock(sprites.red1,4,8,10,10,0,10,10,50,1000);} , //intro heavy block of red1
+
+ function() {  wiggleRedTrail(sprites.red2,30,10,60,0,60,50,200,3000); } ,
+
+
+ function() {  sqRedBlock(sprites.red1,3,7,5,40,80,40,40,50,5000);
+               sqBlock(sprites.geo2,2,5,5,40,50,40,40,50,5000);
+			   sqDBlock(sprites.geo4,6,4,5,40,0,40,20,20,5000,100);
+ },
+
+ function() {  wiggleRedTrail(sprites.red2,30,10,60,0,60,50,200,4000); 
+               wiggleRedTrail(sprites.red2,30,90,-60,0,60,50,200,5000);    } 
+
+ 
+			   
+]
+
+var zones=[zoneA,zoneB,zoneC];
