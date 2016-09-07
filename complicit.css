@@ -209,6 +209,15 @@ div.breaker {
   }
 }
 
+@keyframes roll120 {
+  0% {
+	transform: rotate(0deg);
+  }
+  100% {
+	transform: rotate(120deg);
+  }
+}
+
 @keyframes diefold {
   0% {
 	transform: translateY(0) scale(1,1);
@@ -241,9 +250,13 @@ div.breaker {
     animation: roll 1.5s infinite linear;
  }
  
+ .boardobject div.roll120 {
+    animation: roll120 .7s infinite ease-in-out;
+ }
+ 
  
  .boardobject div.rock {
-    animation: roll .7s infinite ease-in-out alternate;
+    animation: roll120 .7s infinite ease-in-out alternate;
  }
 
  .boardobject div.throb {
@@ -254,4 +267,26 @@ div.breaker {
 	animation: diefold .5s 1 linear;	
  }
 
+ #badsize {
+	 position:absolute;
+	 top:0;
+	 bottom:0;
+	 left:0;
+	 right:0;
+	 background: #500;
+	 color:white;
+	 z-index:1000;
+	 font-size:300%;
+ }
  
+ @media all and (min-height: 25em) {
+	 #badsize {
+		 display:none;
+	 }
+ }
+ 
+ @media all and (max-width: 25em) {
+	 div.zone {
+		 font-size: 10pt;
+	 }
+ }

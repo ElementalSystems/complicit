@@ -190,13 +190,15 @@ sprites.logo=createOGO(400).fillStyle('#999900')
 	        .text("Complicit",0,0,1.5,true)
 	        .echo(10,0,0,0,.02,-90,-90,1,1,.3,0)
 		    .makeSprite('none',25,0);
-sprites.zone0=createOGO(200).lineStyle('#00FF00').lineWidth(1)
-	        .text("\u237A-Zone",.15,.4,2)
-	        .echo(5,.1,.1,0,.5,0,60,1,.1,.7,0)
-			.makeSprite('lev',40,0);
-sprites.zone1=createOGO(200).fillStyle('#4444FF')
-	        .text("\u03B2-Zone",0,.3,2,true)
-	        .echo(20,0,0,.1,.1,0,-10,1,1,.4,0)
+sprites.zone0=createOGO(400)
+            .lineStyle('#00FF00').text("\u03B1-Zone",0,.2,2)
+	        .echo(10,0,0,0,.9,0,60,1,.1,.5,0)
+			.lineStyle('#00FF00').text("\u03B1-Zone",0,.2,2)
+	        .makeSprite('lev',40,0);
+sprites.zone1=createOGO(400).fillStyle('#4444FF')
+	        .text("\u03B2-Zone",0,.25,2,true)
+	        .echo(20,0,0,.2,.2,0,-20,1,1,.4,0)
+			.fillStyle('#99F').text("\u03B2-Zone",0,.25,2,true)
 			.makeSprite('lev',40,0);
 var t1="The avatar moves"; var t2="with your touch";
 var t3="OR use <arrows>"; var t4="and hold <space>";
@@ -242,9 +244,9 @@ sprites.geo2=createOGO(100).lineStyle('#DD00DD').lineWidth(3)
 sprites.geo3=createOGO(200).lineGrad('#00F','#F0F').lineWidth(2)
 	           		       .line(0,0,.15,.3).line(0,0,.3,.3).line(0,0,.3,.15)
 	  				       .line(.15,.3,.3,.3).line(.3,.3,.3,.15)	  
-						   .rotSym(2)
+						   .rotSym(6)
 		                   .echo(8,0,0,0,0,0,-45,.8,1.2,1,0)
-		                   .makeSprite('rock',15,2);
+		                   .makeSprite('roll120',15,2);
 sprites.geo4=createOGO(200).lineStyle('#5555FF').lineWidth(2)
 	        .line(.2,0,0,.4)
 	        .mirror(true,false)
@@ -262,7 +264,7 @@ sprites.blueBoss=createOGO(200).lineStyle('#0000ff').lineWidth(2).lineGrad('#FFF
 	  		.line(.15,.3,.3,.3).line(.3,.3,.3,.15)
 	        .echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
 		    .rotSym(3)		
-	        .makeSprite('throb',25,2,8);
+	        .makeSprite('roll120',25,2,8);
 	  			
 }
 
