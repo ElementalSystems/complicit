@@ -346,6 +346,7 @@
 		  if (board.gameTime>=fireTime) {//time for a fire cycle
 			for (var i=0;i<board.children.length;i+=1) {
 		       var ob=board.children[i];
+			   if (ob.isDead) continue;
 			   if (ob.fire) ob.fire(board.gameTime-ob.createTime,fireCount);
                fireCount+=1;			   
 		    }			

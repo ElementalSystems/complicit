@@ -132,8 +132,19 @@ function blueBossLine(len,fireCycle,yoff) {
 		addOb(sprites.blueBoss,wiggleAction(i*500,10,10-yoff,80,10,2000),xZoneFireAction(20,0,fireCycle,sprites.bbullet,40));
 }
 
-var zoneB=[
 
+function dropReleaseFireAction(fireCycle)
+{
+
+  return function(gameTime,fireCount) {
+	  if (!(fireCount%fireCycle)) {
+		sqDBlock(sprites.geo4,2,2,this.x-10,10,-this.y-10,10,10,5,500);
+	    
+	  }
+  }
+}
+
+var zoneB=[
 
  
  function() {  incoming();
@@ -184,11 +195,10 @@ function() {  sqTrail(sprites.geo3,15,5,40,0,20,40,100,250,2000);
    blueBossLine(5,5,50); 	 		   
  },
 
- function() {  //hard going level with lots of slow blue bosses and rains of blue divers
-   blueBossLine(5,5,0); 	 		
-   sqDBlock(sprites.geo4,6,6,5,40,50,40,20,80,4000,100);
-   blueBossLine(5,5,50); 	 		   
+ function() { //the loone big blue boss 2
+	 	addOb(sprites.blueboss2,wiggleAction(0,30,0,40,5,2000),dropReleaseFireAction(5));
  },
+
   
  function() { finalSection(sprites.zone1); }//victory  
  			   
@@ -211,28 +221,34 @@ function wiggleRedTrail(sprite,length,xstart,xthrow,ystart,ythrow,fireCycle,time
 
 
 var zoneC=[
+
  
- 
- function() {  sqRedBlock(sprites.red2,2,2,5,25,0,30,30,30,3000,100);
-               sqRedBlock(sprites.red2,2,2,80,-25,0,30,30,30,3000,100); 
-			   sqRedBlock(sprites.red2,3,3,30,35,60,30,30,30,2000,100); 
-			   sqTrail(sprites.geo3,30,20,60,0,30,40,50,100,5000);
- },  //three 2 x 2 group of red1 
  
  
  function() {  incoming();			  
                sqRedBlock(sprites.red1,4,8,10,10,0,10,10,50,1000);} , //intro heavy block of red1
+ 
+ function() {  wiggleRedTrail(sprites.red2,30,10,60,0,60,50,200,3000); } ,//first pink tri's agressive
 
- function() {  wiggleRedTrail(sprites.red2,30,10,60,0,60,50,200,3000); } ,
-
-
+ 
+ 
+ function() {  sqRedBlock(sprites.red1,2,2,5,25,0,30,30,30,3000,100);
+               sqRedBlock(sprites.red1,2,2,80,-25,0,30,30,30,3000,100); 
+			   sqRedBlock(sprites.red1,3,3,30,35,60,30,30,30,2000,100); 
+			   sqTrail(sprites.geo3,30,20,60,0,30,40,50,100,5000);
+ },  //three 2 x 2 group of red1 + long blue flowing snake - hard
+ 
+ function() {  wiggleRedTrail(sprites.red2,10,10,60,0,60,50,300,3000); 
+               wiggleRedTrail(sprites.red2,10,90,-60,0,60,50,300,4000);    
+			   wiggleBlock(sprites.flow1,8,1,10,50,0,30,70,800); 
+               wiggleBlock(sprites.flow1,8,1,70,-50,50,30,70,1000);}, //green and red flow mix - fun - 2 death
+ 
  function() {  sqRedBlock(sprites.red1,3,7,5,40,80,40,40,50,5000);
                sqBlock(sprites.geo2,2,5,5,40,50,40,40,50,5000);
 			   sqDBlock(sprites.geo4,6,4,5,40,0,40,20,20,5000,100);
- },
+ } //shielded shooters + falling blues 
+ 
 
- function() {  wiggleRedTrail(sprites.red2,30,10,60,0,60,50,200,4000); 
-               wiggleRedTrail(sprites.red2,30,90,-60,0,60,50,200,5000);    } 
 
  
 			   

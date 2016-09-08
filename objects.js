@@ -153,8 +153,10 @@
   function diveBombAction(fireOff,fireCycle,speed)
   {
 	  return function(gameTime,fireCount) {
-          if (!((fireCount+fireOff)%fireCycle)) 
-            programOb(this,diveAction(this.x,this.y,speed),null);					  		  
+          if (!((fireCount+fireOff)%fireCycle)) {
+			if (this.y>-50) //only start the dive if you are low enough
+               programOb(this,diveAction(this.x,this.y,speed),null);					  		  
+		  }
 	  }
   }
 

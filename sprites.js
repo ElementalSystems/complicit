@@ -278,6 +278,13 @@ sprites.blueBoss=createOGO(200).lineStyle('#0000ff').lineWidth(2).lineGrad('#FFF
 	        .echo(20,-0.2,-0.2,0,0,0,-70,1,1,0,.5)						 
 		    .rotSym(3)		
 	        .makeSprite('roll120',25,2,8);
+sprites.blueboss2=createOGO(300).lineGrad('#00F','#F08').lineWidth(3)
+	        .line(.2,0,0,.4)
+	        .mirror(true,false)
+	        .echo(10,0,-.4,0,0,0,0,.2,1,.5,1)
+			.echo(5,0,-.1,0,0,0,0,2,1,.1,1)
+			.makeSprite('throb',80,2,40);
+			
 sprites.red1=createOGO(200).lineGrad('#F00','#505').lineWidth(3)
 					   .line(0,0,.15,.3).line(0,0,.3,.15)
 					   .line(.15,.3,.3,.3).line(.3,.3,.3,.15)

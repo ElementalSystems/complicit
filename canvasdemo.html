@@ -109,13 +109,13 @@
 		   .addDivSample('normal');
 		
 	  
-      bullet=createOGO(200).lineStyle('#5555FF').lineWidth(3);
-	  bullet.line(.2,0,0,.4)
+      bullet=createOGO(300).lineGrad('#00F','#F08').lineWidth(3)
+	        .line(.2,0,0,.4)
 	        .mirror(true,false)
 	        .echo(10,0,-.4,0,0,0,0,.2,1,.5,1)
-			.echo(5,0,0,0,0,0,0,2,1,.1,1)
+			.echo(5,0,-.1,0,0,0,0,2,1,.1,1)
 			.addDivSample('normal')
-            .addDivSample('big');
+            .addDivSample('vbig');
   
       createOGO(100).lineStyle('#DD00DD').lineWidth(3)
 	        .line(.4,0,0,.4)
