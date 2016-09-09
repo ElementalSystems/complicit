@@ -195,7 +195,7 @@ function() {  sqTrail(sprites.geo3,15,5,40,0,20,40,100,250,2000);
    blueBossLine(5,5,50); 	 		   
  },
 
- function() { //the loone big blue boss 2
+ function() { //the lone big blue boss 2
 	 	addOb(sprites.blueboss2,wiggleAction(0,30,0,40,5,2000),dropReleaseFireAction(5));
  },
 
@@ -221,10 +221,6 @@ function wiggleRedTrail(sprite,length,xstart,xthrow,ystart,ythrow,fireCycle,time
 
 
 var zoneC=[
-
- 
- 
- 
  function() {  incoming();			  
                sqRedBlock(sprites.red1,4,8,10,10,0,10,10,50,1000);} , //intro heavy block of red1
  
@@ -246,10 +242,18 @@ var zoneC=[
  function() {  sqRedBlock(sprites.red1,3,7,5,40,80,40,40,50,5000);
                sqBlock(sprites.geo2,2,5,5,40,50,40,40,50,5000);
 			   sqDBlock(sprites.geo4,6,4,5,40,0,40,20,20,5000,100);
- } //shielded shooters + falling blues 
+ }, //shielded shooters + falling blues 
  
 
+ function() { //the climax in hell
+	 addOb(sprites.blueboss2,wiggleAction(0,30,0,40,5,2000),dropReleaseFireAction(15));
+	 blueBossLine(5,10,0); 	 		
+     wiggleRedTrail(sprites.red2,10,90,-60,0,60,50,300,1000);      	
+	 sqBlock(sprites.geo2,2,5,5,40,0,30,30,50,5000);			   
+ },
 
+ function() { finalSection(sprites.zone2); },//victory  
+ 	
  
 			   
 ]

@@ -23,6 +23,7 @@ body {
 	border: solid 2px #FFA;
 	transition: transform 1s ease-in-out;
 	transform: translateY(-110%);
+	z-index: 190;	
 }
 
 
@@ -120,6 +121,24 @@ div.breaker {
 	box-sizing: border-box;
 }
 
+#credits {
+	position: absolute;
+	right:0.25em;
+	top:4em;
+	color:#FFA;
+	z-index: 150;
+	transform:rotate(-90deg);
+	transform-origin: 100% 100%;
+}
+
+#credits a {
+	color: #FFF;
+	text-decoration:none;
+	
+}
+
+
+
 #timer {
 	position: absolute;
 	right:-.1em;
@@ -128,12 +147,13 @@ div.breaker {
 	padding: 0.2em 0.2em 0.2em 0em;
 	border-radius: 0em 0em 0em 1.5em;
 	background: rgba(0,0,0,.6);
-	border: #FF0  3px;
+	border: #FF0 solid 3px;
 	color: #FF8;
 	font-size: 20pt;
 	font-family: monospace;	
     display:none;
 	text-align:right;
+	z-index: 200;
 	
 
 }
@@ -152,6 +172,7 @@ div.breaker {
 	font-family: monospace;
 	font-weight: bold;
 	line-height: 2em;
+	
 }
 
 
